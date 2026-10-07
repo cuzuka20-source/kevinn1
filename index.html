@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kỷ niệm của chúng mình</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Nunito&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="mat-khau-man-hinh" id="mat-khau-man-hinh">
+  <div class="mat-khau-hop">
+    <p class="mat-khau-tieu-de">19032022-28042026🔒</p>
+    <input type="password" id="mat-khau-input" placeholder="Mật khẩu..." autocomplete="off">
+    <button id="mat-khau-nut">Xem</button>
+    <p class="mat-khau-loi" id="mat-khau-loi"></p>
+  </div>
+</div>
+
+  <!-- PHẦN 1: MỞ ĐẦU -->
+  <section id="mo-dau" class="chuong-gio">
+    <canvas class="qua-cau" id="tym-canvas"></canvas>
+    <div class="chuong-gio-item"><img src="assets/sinhnhatdautien.JPG" alt=""></div>
+    <div class="chuong-gio-item"><img src="assets/namtaydautien.JPG" alt=""></div>
+    <div class="chuong-gio-item"><video src="assets/videodigo1.mp4" controls></video></div>
+    <div class="chuong-gio-item"><img src="assets/sanbay1.JPG" alt=""></div>
+    <div class="chuong-gio-item"><img src="assets/dalat1.JPG" alt="da la"> </div>
+    <div class="chuong-gio-item"><video src="assets/dian.mp4" controls></video></div>
+    <div class="chuong-gio-item"><img src="assets/kiniemnam4.jpg" alt=""></div>
+    <div class="chuong-gio-item"><img src="assets/dalat2.JPG" alt="da la"></div>
+    <div class="chuong-gio-item"><img src="assets/dalat3.JPG" alt="da la"></div>
+    <div class="chuong-gio-item"><video src="assets/video1.mp4" controls></video></div>
+    <div class="chuong-gio-item"><img src="assets/sinhnhatku1.JPG" alt="sinh nhat"></div>
+    <div class="chuong-gio-item"><img src="assets/diengio2.JPG" alt="dien gio"></div>
+    <div class="chuong-gio-item"><video src="assets/video2.mp4" controls></video></div>
+    <div class="chuong-gio-item"><img src="assets/diengiochung1.JPG" alt="dien gio"></div>
+    <div class="chuong-gio-item"><img src="assets/dalat6.JPG" alt="da lat"></div>
+    <div class="chuong-gio-item"><video src="assets/lamvideo.mp4" controls></video></div>
+    <div class="chuong-gio-item"><img src="assets/diengiochung2.JPG" alt="dien gio"></div>
+    <div class="chuong-gio-item"><img src="assets/kiniem.jpg" alt="ki niem"></div>
+    <div class="chuong-gio-item"><img src="assets/kinem2.jpg" alt="ki niem"></div>
+    <div class="chuong-gio-item"><video src="assets/videodiengio2.mp4" controls></video></div>
+    <p class="chu-hien-ra">Chào Cục Vàng 🙂 đến với những kỷ niệm của chúng ta…!</p>
+  </section>
+
+  <!-- PHẦN 2: QUÁ TRÌNH 4 NĂM + 2 HÒM THƯ -->
+  <section id="qua-trinh">
+    <div class="nam-tabs">
+      <div class="nam-tab-item">
+        <img class="nam-thumb" data-nam="1" data-video="assets/videonam1.mp4" data-mota="Mô tả năm thứ nhất..." src="assets/sinhnhatdautien.JPG" alt="Năm 1">
+        <span class="nam-label">Năm 1</span>
+      </div>
+      <div class="nam-tab-item">
+        <img class="nam-thumb" data-nam="2" data-video="assets/videonam2.mp4" data-mota="Mô tả năm thứ hai..." src="assets/dalat1.JPG" alt="Năm 2">
+        <span class="nam-label">Năm 2</span>
+      </div>
+      <div class="nam-tab-item">
+        <img class="nam-thumb" data-nam="3" data-video="assets/videonam3.mp4" data-mota="Mô tả năm thứ ba..." src="assets/kiniem.jpg" alt="Năm 3">
+        <span class="nam-label">Năm 3</span>
+      </div>
+      <div class="nam-tab-item">
+        <img class="nam-thumb" data-nam="4" data-video="assets/videonam4.mp4" data-mota="Mô tả năm thứ tư..." src="assets/kiniemnam4.jpg" alt="Năm 4">
+        <span class="nam-label">Năm 4</span>
+      </div>
+    </div>
+
+    <div class="hom-thu-khu">
+      <div class="hom-thu" id="hom-qua-bi-mat">
+        <div class="hom-thu-icon">💌</div>
+        <span class="hom-thu-ten">Quà Bí Mật</span>
+      </div>
+      <div class="hom-thu" id="hom-dieu-muon-noi">
+        <div class="hom-thu-icon">✉️</div>
+        <span class="hom-thu-ten">Điều muốn nói nhất của bạn</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CỬA SỔ XEM VIDEO TỪNG NĂM -->
+  <div class="nam-modal" id="nam-modal">
+    <div class="nam-modal-noidung">
+      <button class="nam-dong" id="nam-dong">✕</button>
+      <video class="nam-modal-video" id="nam-modal-video" controls></video>
+      <p class="nam-modal-mota" id="nam-modal-mota"></p>
+    </div>
+  </div>
+
+  <!-- CỬA SỔ HÒM THƯ 1: QUÀ BÍ MẬT -->
+  <div class="hom-thu-modal" id="modal-qua-bi-mat">
+    <div class="hom-thu-modal-noidung">
+      <button class="hom-thu-dong">✕</button>
+      <img src="assets/nguoithu3.jpg" alt="Quà bí mật" class="qua-bi-mat-anh">
+      <p class="qua-bi-mat-mota">Không biết bức ảnh này tht hay không...nếu vậy thì phải hạnh phúc nhé</p>
+    </div>
+  </div>
+
+  <!-- CỬA SỔ HÒM THƯ 2: ĐIỀU MUỐN NÓI NHẤT -->
+  <div class="hom-thu-modal" id="modal-dieu-muon-noi">
+    <div class="hom-thu-modal-noidung">
+      <button class="hom-thu-dong">✕</button>
+      <p class="dieu-muon-noi-tieu-de">Điều bạn muốn nói nhất là gì?</p>
+      <textarea id="dieu-muon-noi-noidung" placeholder="Viết điều bạn muốn nói ở đây..."></textarea>
+      <button id="dieu-muon-noi-gui">Gửi</button>
+    </div>
+  </div>
+
+  <!-- PHẦN 3: KẾT THÚC -->
+  <section id="ket-thuc" class="tuong-anh">
+    <div class="tuong-anh-anh"><img src="assets/dalat1.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/diengio1.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_0046.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/dalat3.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/diengio2.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_0066.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_0047.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/dalat4.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/dalat2.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/diengio3.jpg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/dalat5.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/dalat6.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/diengiochung1.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/diengiochung2.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_0164.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_0165.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_0174.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_0175.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_0180.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_0985.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_0991.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_1049.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_1053.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_1148.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/kiniem3.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/latda1.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/kiniem4.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/kinem2.jpg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/namtay4.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_1211.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_1276.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_1276.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_1365.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_1327.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_1425.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_1438.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_1813.jpg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/kiniem3.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_3820.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_3960.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_4026.jpg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_4035.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/sanbay1.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_4212.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_4220.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_4286.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_5028.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_5383.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/IMG_5483.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/tuyen1.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/tuyen3.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/kiniem5.jpeg alt="></div>
+    <div class="tuong-anh-anh"><img src="assets/kiniem1.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/kiniem.jpg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/dalat3.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/sinhnhatdautien.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/diengio8.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/sanbay3.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/namtaydautien.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/tuyen2.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/sinhnhat2.jpg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/latda1.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/latda2.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/sinhnhatku1.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/namtay2.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/namtaydautien.JPG" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/tuyen3.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/diengio7.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/kutuyen.jpeg" alt=""></div>
+    <div class="tuong-anh-anh"><img src="assets/nguoithu3.jpg" alt=""></div>
+    <div class="doan-van">
+      <p class="doan-van-tieu-de">Những khoảng khắc bên nhau<br> Cảm ơn em đã đến bên anh...</p>
+      <p>Bốn năm bên nhau, nhìn lại, mình đã có thật nhiều kỷ niệm đẹp em nhỉ? Từ lần đầu anh chủ động làm quen, những cuộc gọi cho em trong giờ làm thêm,rồi mình trở thành người yêu của nhau. 
+        Anh vẫn nhớ lần đầu gặp mặt, cùng đón sinh nhật em rồi lại yêu xa, chỉ có thể nhìn nhau qua màn hình điện thoại. Rồi sinh nhật anh ở Đà Nẵng, 
+        kỷ niệm một năm bên nhau ở Đà Lạt, và những ngày tháng khó khăn nhất khi hai đứa ở hai nước, khác công việc, việc học và múi giờ nhưng vẫn cố gắng dành thời gian cho nhau. 
+        Mỗi năm, mình đều cố gặp nhau ít nhất một lần. Vậy mà bốn năm trôi qua nhanh thật. Mình đã cùng chia sẻ bao niềm vui, nỗi buồn và từng hứa với nhau rất nhiều điều. 
+        Anh tiếc vì không thể cùng em đi đến cuối con đường, nhưng chưa bao giờ hối hận vì đã yêu em. Cảm ơn em đã cho anh biết cảm giác yêu một người thật lòng, cùng nhau cố gắng và từng hy vọng về một cái kết đẹp. 
+        Cuộc sống vốn chẳng ai biết trước điều gì sẽ xảy ra. Anh buồn vì lần cuối ở bên nhau, anh cảm nhận được em đã không còn yêu anh như trước nữa mà con khó chịu với anh bỏ lơ anh nên a hơi buồn và thất vọng. 
+        Anh nghĩ sau lần về đó thì a nghĩ đến việc sẽ cả 2 có thể dừng lại nhưng a và e vẫn cố để cả 2 tiếp tục mqh này. Anh nói những điều này không phải để trách em hay đổ lỗi cho em.
+        Anh biết mình cũng có nhiều lần làm em buồn và tổn thương. Anh không cố ý, vì tình cảm anh dành cho em là thật. Sau những ngày cả hai im lặng, khi những vấn đề vẫn chưa được giải quyết và con đường 
+        phía trước không còn như những gì mình từng hứa, anh đã chọn im lặng. Anh nghĩ đó có thể là cách tốt nhất để cả hai bớt đau lòng. Có lẽ cả anh và em đều đã cố gắng rất nhiều cho mối quan hệ này.
+        Dù không thể đi tiếp, anh vẫn biết ơn vì đã gặp em và có bốn năm thanh xuân bên cạnh em. Em đã cho anh nhiều điều tốt đẹp, dạy anh biết quan tâm, chăm sóc và trân trọng một người. 
+        Anh còn rất nhiều điều muốn nói, chỉ là khi viết ra lại chẳng biết phải diễn đạt thế nào cho trọn vẹn. Anh chỉ muốn em biết rằng em là một người tốt, và anh luôn trân trọng những gì em đã dành cho anh. 
+        Đôi khi anh ước giá như hai đứa được ở gần nhau hơn, có thể hiểu nhau hơn, thì mọi chuyện đã khác. Anh không biết sau này mình còn gặp lại nhau không, nhưng dù thế nào, anh vẫn mong em ( bame10nhi, A2) luôn nhận được những điều tốt đẹp nhất.
+        Cảm ơn em vì đã đến bên anh, trở thành một phần thật đẹp trong thanh xuân của anh. Anh sẽ luôn nhớ về hành trinh này....lần cuối a muốn nói là iu Cục Vàng....nhưng!</p>
+    </div>
+  </section>
+<script src="script.js"></script>
+</body>
+</html>
