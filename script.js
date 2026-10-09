@@ -1,5 +1,5 @@
 // ============================
-// PHẦN 0: MÀN HÌNH MẬT KHẨU
+// PHáº¦N 0: MĂ€N HĂŒNH Máº¬T KHáº¨U
 // ============================
 
 (function () {
@@ -13,18 +13,18 @@
 
   if (!manHinh || !oNhap || !nutXem) return;
 
-  // Nếu trước đó đã nhập đúng thì bỏ qua màn hình mật khẩu luôn.
-  // Bọc trong try/catch vì khi mở trang bằng đường dẫn file:/// (chưa đưa lên
-  // server/GitHub Pages), một số trình duyệt (đặc biệt Safari) CHẶN localStorage
-  // và ném lỗi ngay lập tức — nếu không bắt lỗi, cả đoạn script bên dưới
-  // (kể cả phần gắn sự kiện cho nút "Xem") sẽ không bao giờ chạy, khiến
-  // bấm nút không có phản ứng gì.
+  // Náº¿u trÆ°á»›c Ä‘Ă³ Ä‘Ă£ nháº­p Ä‘Ăºng thĂ¬ bá» qua mĂ n hĂ¬nh máº­t kháº©u luĂ´n.
+  // Bá»c trong try/catch vĂ¬ khi má»Ÿ trang báº±ng Ä‘Æ°á»ng dáº«n file:/// (chÆ°a Ä‘Æ°a lĂªn
+  // server/GitHub Pages), má»™t sá»‘ trĂ¬nh duyá»‡t (Ä‘áº·c biá»‡t Safari) CHáº¶N localStorage
+  // vĂ  nĂ©m lá»—i ngay láº­p tá»©c â€” náº¿u khĂ´ng báº¯t lá»—i, cáº£ Ä‘oáº¡n script bĂªn dÆ°á»›i
+  // (ká»ƒ cáº£ pháº§n gáº¯n sá»± kiá»‡n cho nĂºt "Xem") sáº½ khĂ´ng bao giá» cháº¡y, khiáº¿n
+  // báº¥m nĂºt khĂ´ng cĂ³ pháº£n á»©ng gĂ¬.
   try {
     if (localStorage.getItem(KHOA_LUU) === 'true') {
       manHinh.classList.add('da-mo');
     }
   } catch (e) {
-    // Không đọc được localStorage thì bỏ qua, coi như chưa mở khóa lần nào
+    // KhĂ´ng Ä‘á»c Ä‘Æ°á»£c localStorage thĂ¬ bá» qua, coi nhÆ° chÆ°a má»Ÿ khĂ³a láº§n nĂ o
   }
 
   function thuMoKhoa() {
@@ -35,10 +35,10 @@
       try {
         localStorage.setItem(KHOA_LUU, 'true');
       } catch (e) {
-        // localStorage có thể bị chặn, không sao, chỉ là lần sau phải nhập lại
+        // localStorage cĂ³ thá»ƒ bá»‹ cháº·n, khĂ´ng sao, chá»‰ lĂ  láº§n sau pháº£i nháº­p láº¡i
       }
     } else {
-      dongLoi.textContent = 'Sai mật khẩu rồi, thử lại nhé.';
+      dongLoi.textContent = 'Sai máº­t kháº©u rá»“i, thá»­ láº¡i nhĂ©.';
       oNhap.value = '';
       oNhap.focus();
     }
@@ -51,7 +51,7 @@
 })();
 
 // ============================
-// PHẦN 1: MỞ ĐẦU (chuông gió) - xếp theo hình chữ nhật thật, không chồng đè
+// PHáº¦N 1: Má» Äáº¦U (chuĂ´ng giĂ³) - xáº¿p theo hĂ¬nh chá»¯ nháº­t tháº­t, khĂ´ng chá»“ng Ä‘Ă¨
 // ============================
 
 function doTachAnh(a, b) {
@@ -148,10 +148,34 @@ function xepAnhKhongDe(khung) {
   });
 }
 
-document.querySelectorAll('.chuong-gio').forEach(xepAnhKhongDe);
+// Pháº£i Ä‘á»£i áº£nh/video Táº¢I XONG rá»“i má»›i Ä‘o kĂ­ch thÆ°á»›c vĂ  xáº¿p vá»‹ trĂ­ â€”
+// náº¿u Ä‘o lĂºc áº£nh chÆ°a táº£i, offsetHeight sáº½ sai (quĂ¡ nhá»), khiáº¿n cĂ¡c áº£nh
+// bá»‹ xáº¿p quĂ¡ sĂ¡t nhau, vĂ  khi áº£nh táº£i xong hiá»‡n kĂ­ch thÆ°á»›c tháº­t thĂ¬
+// chĂºng Ä‘Ă¨ chá»“ng lĂªn nhau (Ä‘Ăºng lá»—i Ä‘ang gáº·p).
+function doiTaiXongRoiXep(khung) {
+  const cacMedia = khung.querySelectorAll('.chuong-gio-item img, .chuong-gio-item video');
+  const cacPromise = Array.from(cacMedia).map((m) => {
+    if (m.tagName === 'IMG') {
+      if (m.complete) return Promise.resolve();
+      return new Promise((xong) => {
+        m.addEventListener('load', xong, { once: true });
+        m.addEventListener('error', xong, { once: true });
+      });
+    }
+    // video
+    if (m.readyState >= 1) return Promise.resolve();
+    return new Promise((xong) => {
+      m.addEventListener('loadedmetadata', xong, { once: true });
+      m.addEventListener('error', xong, { once: true });
+    });
+  });
+  return Promise.all(cacPromise).then(() => xepAnhKhongDe(khung));
+}
+
+document.querySelectorAll('.chuong-gio').forEach(doiTaiXongRoiXep);
 
 // ============================
-// TRÁI TIM HẠT SÁNG (thay quả cầu cũ) - đã tối ưu hiệu năng
+// TRĂI TIM Háº T SĂNG (thay quáº£ cáº§u cÅ©) - Ä‘Ă£ tá»‘i Æ°u hiá»‡u nÄƒng
 // ============================
 
 function khoiTaoTymHat(canvas) {
@@ -287,7 +311,7 @@ function khoiTaoTymHat(canvas) {
 const tymCanvas = document.getElementById('tym-canvas');
 if (tymCanvas) khoiTaoTymHat(tymCanvas);
 
-// Hiện ảnh lần lượt khi cuộn tới, rồi mới tới dòng chữ
+// Hiá»‡n áº£nh láº§n lÆ°á»£t khi cuá»™n tá»›i, rá»“i má»›i tá»›i dĂ²ng chá»¯
 document.querySelectorAll('.chuong-gio').forEach((khung) => {
   const cacAnh = khung.querySelectorAll('.chuong-gio-item');
   const dongChu = khung.querySelector('.chu-hien-ra');
@@ -321,7 +345,7 @@ function chayHieuUngChuongGio(cacAnh, dongChu) {
 }
 
 // ============================
-// PHẦN 2: 4 NĂM (cửa sổ xem video)
+// PHáº¦N 2: 4 NÄ‚M (cá»­a sá»• xem video)
 // ============================
 
 const cacThumb = document.querySelectorAll('.nam-thumb');
@@ -362,7 +386,7 @@ modal.addEventListener('click', (event) => {
 });
 
 // ============================
-// 2 HÒM THƯ (Quà Bí Mật + Điều muốn nói nhất)
+// 2 HĂ’M THÆ¯ (QuĂ  BĂ­ Máº­t + Äiá»u muá»‘n nĂ³i nháº¥t)
 // ============================
 
 document.getElementById('hom-qua-bi-mat').addEventListener('click', () => {
@@ -390,17 +414,17 @@ document.querySelectorAll('.hom-thu-modal').forEach((modalEl) => {
 document.getElementById('dieu-muon-noi-gui').addEventListener('click', () => {
   const noiDung = document.getElementById('dieu-muon-noi-noidung').value.trim();
   if (!noiDung) {
-    alert('Bạn chưa viết gì cả, hãy nhập điều bạn muốn nói trước khi gửi nhé.');
+    alert('Báº¡n chÆ°a viáº¿t gĂ¬ cáº£, hĂ£y nháº­p Ä‘iá»u báº¡n muá»‘n nĂ³i trÆ°á»›c khi gá»­i nhĂ©.');
     return;
   }
   const email = 'DIA_CHI_EMAIL_CUA_BAN@gmail.com';
-  const tieuDe = encodeURIComponent('Điều muốn nói nhất từ trang kỷ niệm');
+  const tieuDe = encodeURIComponent('Äiá»u muá»‘n nĂ³i nháº¥t tá»« trang ká»· niá»‡m');
   const noiDungMaHoa = encodeURIComponent(noiDung);
   window.location.href = `mailto:${email}?subject=${tieuDe}&body=${noiDungMaHoa}`;
 });
 
 // ============================
-// PHẦN 3: KẾT THÚC (tường ảnh)
+// PHáº¦N 3: Káº¾T THĂC (tÆ°á»ng áº£nh)
 // ============================
 
 function raiAnhTuongAnh(khung) {
@@ -408,7 +432,7 @@ function raiAnhTuongAnh(khung) {
   const soAnh = cacAnh.length;
 
   if (soAnh === 0) {
-    console.warn('Không tìm thấy ảnh .tuong-anh-anh nào trong #ket-thuc');
+    console.warn('KhĂ´ng tĂ¬m tháº¥y áº£nh .tuong-anh-anh nĂ o trong #ket-thuc');
     return;
   }
 
@@ -437,6 +461,7 @@ function raiAnhTuongAnh(khung) {
     const gocXoay = (Math.random() - 0.5) * 16;
 
     anh.style.width = `${kichThuocAnh}px`;
+    anh.style.height = `${kichThuocAnh}px`;
     anh.style.left = `${x}px`;
     anh.style.top = `${y}px`;
     anh.style.transform = `translate(-50%, -50%) rotate(${gocXoay}deg)`;
@@ -448,8 +473,8 @@ if (khungKetThuc) {
   raiAnhTuongAnh(khungKetThuc);
 
   const cacAnhKetThuc = khungKetThuc.querySelectorAll('.tuong-anh-anh');
-  // .doan-van đã được tách ra khỏi #ket-thuc (nằm ngoài section) để không bị cắt chữ,
-  // nên phải tìm nó ở toàn trang (document) thay vì chỉ trong khungKetThuc.
+  // .doan-van Ä‘Ă£ Ä‘Æ°á»£c tĂ¡ch ra khá»i #ket-thuc (náº±m ngoĂ i section) Ä‘á»ƒ khĂ´ng bá»‹ cáº¯t chá»¯,
+  // nĂªn pháº£i tĂ¬m nĂ³ á»Ÿ toĂ n trang (document) thay vĂ¬ chá»‰ trong khungKetThuc.
   const doanVan = document.querySelector('.doan-van');
   let daChayKetThuc = false;
 
@@ -476,9 +501,9 @@ if (khungKetThuc) {
 }
 
 // ============================
-// TỰ TÍNH LẠI VỊ TRÍ ẢNH KHI ĐỔI KÍCH THƯỚC CỬA SỔ
-// (trước đây chỉ tính 1 lần lúc tải trang, nên khi phóng to/thu nhỏ cửa sổ
-// sau đó, ảnh bị dồn cụm/chồng lên nhau thay vì giãn đều theo khung hình)
+// Tá»° TĂNH Láº I Vá» TRĂ áº¢NH KHI Äá»”I KĂCH THÆ¯á»C Cá»¬A Sá»”
+// (trÆ°á»›c Ä‘Ă¢y chá»‰ tĂ­nh 1 láº§n lĂºc táº£i trang, nĂªn khi phĂ³ng to/thu nhá» cá»­a sá»•
+// sau Ä‘Ă³, áº£nh bá»‹ dá»“n cá»¥m/chá»“ng lĂªn nhau thay vĂ¬ giĂ£n Ä‘á»u theo khung hĂ¬nh)
 // ============================
 let henGioTinhLai = null;
 function tinhLaiBoCucKhiResize() {
