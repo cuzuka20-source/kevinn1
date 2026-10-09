@@ -14,7 +14,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Nền sao lấp lánh cho toàn trang */
+/* Ná»n sao láº¥p lĂ¡nh cho toĂ n trang */
 body::before {
   content: "";
   position: fixed;
@@ -43,7 +43,7 @@ section {
 }
 
 /* ============================
-   PHẦN 1: MỞ ĐẦU (chuông gió)
+   PHáº¦N 1: Má» Äáº¦U (chuĂ´ng giĂ³)
    ============================ */
 .chuong-gio {
   position: relative;
@@ -68,7 +68,7 @@ section {
   z-index: 0;
 }
 
-/* Ảnh/video tự co giãn theo màn hình: nhỏ trên điện thoại, to trên laptop/màn hình lớn */
+/* áº¢nh/video tá»± co giĂ£n theo mĂ n hĂ¬nh: nhá» trĂªn Ä‘iá»‡n thoáº¡i, to trĂªn laptop/mĂ n hĂ¬nh lá»›n */
 .chuong-gio-item {
   width: clamp(90px, 18vw, 140px);
   opacity: 0;
@@ -108,7 +108,7 @@ section {
 }
 
 /* ============================
-   PHẦN 2: 4 NĂM
+   PHáº¦N 2: 4 NÄ‚M
    ============================ */
 #qua-trinh {
   padding-bottom: 20px;
@@ -151,7 +151,7 @@ section {
   color: var(--mau-chu);
 }
 
-/* Cửa sổ xem video từng năm */
+/* Cá»­a sá»• xem video tá»«ng nÄƒm */
 .nam-modal {
   position: fixed;
   inset: 0;
@@ -213,7 +213,7 @@ section {
 }
 
 /* ============================
-   2 HÒM THƯ
+   2 HĂ’M THÆ¯
    ============================ */
 .hom-thu-khu {
   display: flex;
@@ -311,7 +311,7 @@ section {
   justify-content: center;
 }
 
-/* Hòm thư 1: Quà Bí Mật (ảnh hiện trước, chữ hiện sau 1 giây) */
+/* HĂ²m thÆ° 1: QuĂ  BĂ­ Máº­t (áº£nh hiá»‡n trÆ°á»›c, chá»¯ hiá»‡n sau 1 giĂ¢y) */
 .qua-bi-mat-anh {
   display: block;
   max-width: 100%;
@@ -347,7 +347,7 @@ section {
   transition-delay: 1s;
 }
 
-/* Hòm thư 2: Điều muốn nói nhất */
+/* HĂ²m thÆ° 2: Äiá»u muá»‘n nĂ³i nháº¥t */
 .dieu-muon-noi-tieu-de {
   font-family: var(--font-tieu-de);
   font-size: clamp(1.3rem, 3.5vw, 1.6rem);
@@ -386,7 +386,7 @@ section {
 }
 
 /* ============================
-   PHẦN 3: KẾT THÚC (tường ảnh)
+   PHáº¦N 3: Káº¾T THĂC (tÆ°á»ng áº£nh)
    ============================ */
 #ket-thuc.tuong-anh {
   position: relative;
@@ -427,11 +427,11 @@ section {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
 }
 
-/* ĐOẠN VĂN: nằm NGOÀI #ket-thuc (xem index.html) để không bao giờ bị
-   overflow:hidden cắt chữ dù thư dài bao nhiêu. Đã thử kéo chồng lên
-   tường ảnh + làm mờ kính nhưng ảnh nhỏ/xoay nghiêng/xám bên dưới làm
-   nền bị loang lổ, rối mắt — nên quay lại tách riêng rõ ràng, chỉ để
-   nền nhạt hơn bản gốc một chút cho đỡ nặng nề. */
+/* ÄOáº N VÄ‚N: náº±m NGOĂ€I #ket-thuc (xem index.html) Ä‘á»ƒ khĂ´ng bao giá» bá»‹
+   overflow:hidden cáº¯t chá»¯ dĂ¹ thÆ° dĂ i bao nhiĂªu. ÄĂ£ thá»­ kĂ©o chá»“ng lĂªn
+   tÆ°á»ng áº£nh + lĂ m má» kĂ­nh nhÆ°ng áº£nh nhá»/xoay nghiĂªng/xĂ¡m bĂªn dÆ°á»›i lĂ m
+   ná»n bá»‹ loang lá»•, rá»‘i máº¯t â€” nĂªn quay láº¡i tĂ¡ch riĂªng rĂµ rĂ ng, chá»‰ Ä‘á»ƒ
+   ná»n nháº¡t hÆ¡n báº£n gá»‘c má»™t chĂºt cho Ä‘á»¡ náº·ng ná». */
 .doan-van {
   position: relative;
   margin: 0 auto 120px;
@@ -472,7 +472,7 @@ section {
   text-align: center;
 }
 
-/* Link TikTok cuối đoạn văn */
+/* Link TikTok cuá»‘i Ä‘oáº¡n vÄƒn */
 .link-tiktok {
   display: inline-block;
   margin-top: 20px;
