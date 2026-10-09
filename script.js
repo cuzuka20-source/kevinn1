@@ -1,35 +1,55 @@
 // ============================
-// MÀN HÌNH NHẬP MẬT KHẨU
+// PHẦN 0: MÀN HÌNH MẬT KHẨU
 // ============================
+
 (function () {
   const MAT_KHAU_DUNG = 'kuiutuyen28';
-  const man_hinh = document.getElementById('mat-khau-man-hinh');
-  const input = document.getElementById('mat-khau-input');
-  const nut = document.getElementById('mat-khau-nut');
-  const loi = document.getElementById('mat-khau-loi');
+  const KHOA_LUU = 'da-nhap-dung';
 
-  if (!man_hinh) return;
+  const manHinh = document.getElementById('mat-khau-man-hinh');
+  const oNhap = document.getElementById('mat-khau-input');
+  const nutXem = document.getElementById('mat-khau-nut');
+  const dongLoi = document.getElementById('mat-khau-loi');
 
-  if (localStorage.getItem('da-nhap-dung') === 'true') {
-    man_hinh.classList.add('da-mo');
+  if (!manHinh || !oNhap || !nutXem) return;
+
+  // Nếu trước đó đã nhập đúng thì bỏ qua màn hình mật khẩu luôn.
+  // Bọc trong try/catch vì khi mở trang bằng đường dẫn file:/// (chưa đưa lên
+  // server/GitHub Pages), một số trình duyệt (đặc biệt Safari) CHẶN localStorage
+  // và ném lỗi ngay lập tức — nếu không bắt lỗi, cả đoạn script bên dưới
+  // (kể cả phần gắn sự kiện cho nút "Xem") sẽ không bao giờ chạy, khiến
+  // bấm nút không có phản ứng gì.
+  try {
+    if (localStorage.getItem(KHOA_LUU) === 'true') {
+      manHinh.classList.add('da-mo');
+    }
+  } catch (e) {
+    // Không đọc được localStorage thì bỏ qua, coi như chưa mở khóa lần nào
   }
 
   function thuMoKhoa() {
-    if (input.value === MAT_KHAU_DUNG) {
-      localStorage.setItem('da-nhap-dung', 'true');
-      man_hinh.classList.add('da-mo');
-      loi.textContent = '';
+    const giaTri = oNhap.value.trim();
+    if (giaTri === MAT_KHAU_DUNG) {
+      dongLoi.textContent = '';
+      manHinh.classList.add('da-mo');
+      try {
+        localStorage.setItem(KHOA_LUU, 'true');
+      } catch (e) {
+        // localStorage có thể bị chặn, không sao, chỉ là lần sau phải nhập lại
+      }
     } else {
-      loi.textContent = 'Sai mật khẩu rồi, thử lại nhé';
-      input.value = '';
+      dongLoi.textContent = 'Sai mật khẩu rồi, thử lại nhé.';
+      oNhap.value = '';
+      oNhap.focus();
     }
   }
 
-  nut.addEventListener('click', thuMoKhoa);
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') thuMoKhoa();
+  nutXem.addEventListener('click', thuMoKhoa);
+  oNhap.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') thuMoKhoa();
   });
 })();
+
 // ============================
 // PHẦN 1: MỞ ĐẦU (chuông gió) - xếp theo hình chữ nhật thật, không chồng đè
 // ============================
@@ -417,7 +437,6 @@ function raiAnhTuongAnh(khung) {
     const gocXoay = (Math.random() - 0.5) * 16;
 
     anh.style.width = `${kichThuocAnh}px`;
-    anh.style.height = `${kichThuocAnh}px`;
     anh.style.left = `${x}px`;
     anh.style.top = `${y}px`;
     anh.style.transform = `translate(-50%, -50%) rotate(${gocXoay}deg)`;
@@ -429,7 +448,9 @@ if (khungKetThuc) {
   raiAnhTuongAnh(khungKetThuc);
 
   const cacAnhKetThuc = khungKetThuc.querySelectorAll('.tuong-anh-anh');
-  const doanVan = khungKetThuc.querySelector('.doan-van');
+  // .doan-van đã được tách ra khỏi #ket-thuc (nằm ngoài section) để không bị cắt chữ,
+  // nên phải tìm nó ở toàn trang (document) thay vì chỉ trong khungKetThuc.
+  const doanVan = document.querySelector('.doan-van');
   let daChayKetThuc = false;
 
   const quanSatKetThuc = new IntersectionObserver((entries) => {
@@ -453,3 +474,18 @@ if (khungKetThuc) {
 
   quanSatKetThuc.observe(khungKetThuc);
 }
+
+// ============================
+// TỰ TÍNH LẠI VỊ TRÍ ẢNH KHI ĐỔI KÍCH THƯỚC CỬA SỔ
+// (trước đây chỉ tính 1 lần lúc tải trang, nên khi phóng to/thu nhỏ cửa sổ
+// sau đó, ảnh bị dồn cụm/chồng lên nhau thay vì giãn đều theo khung hình)
+// ============================
+let henGioTinhLai = null;
+function tinhLaiBoCucKhiResize() {
+  clearTimeout(henGioTinhLai);
+  henGioTinhLai = setTimeout(() => {
+    document.querySelectorAll('.chuong-gio').forEach(xepAnhKhongDe);
+    if (khungKetThuc) raiAnhTuongAnh(khungKetThuc);
+  }, 250);
+}
+window.addEventListener('resize', tinhLaiBoCucKhiResize);
